@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Site</title>
+
+    <style>
+        .container {
+            display: flex;
+            margin: 100px 0 0 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="input">
+        <button id="button">click</button>
+    </div>
+    <script>
+        let input = document.querySelector('#input');
+        let button = document.getElementById('button');
+
+        const sendData = () => {
+            let data = {mail: input.value};
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            };
+
+            fetch('/api', options
+                ).then((res)=> res.json())
+                .then((data)=> console.log(data))
+                .catch((err)=> console.err(err));
+            input.value = '';
+        }
+
+        button.addEventListener('click', () => sendData())
+    </script>
+</body>
+</html>
